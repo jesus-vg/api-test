@@ -1,0 +1,21 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
+module.exports = {
+    content: [
+        "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
+        "./storage/framework/views/*.php",
+        "./resources/views/**/*.blade.php",
+        // add components vue files
+        "./resources/js/components/**/*.vue",
+    ],
+
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ["Montserrat", ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
+
+    plugins: [require("@tailwindcss/forms")],
+};
