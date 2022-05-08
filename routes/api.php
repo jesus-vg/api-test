@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,8 +12,18 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+/**
+ * Rutas para el manejo de usuarios.
+ * para model binding se usa {user} en vez de {id}
+ *         /users/delete/{user}         url backend
+ *         /users/delete/{id}              url frontend
+ */
+Route::controller( UserController::class )->group( function () {
+    Route::post( '/users/new', 'store' );
+    Route::delete( '/users/delete/{user}', 'destroy' );
+    Route::put( '/users/update/{user}', 'update' );
+    Route::get( '/users/{user}', 'show' );
+    Route::get( '/users', 'index' );
+} );
